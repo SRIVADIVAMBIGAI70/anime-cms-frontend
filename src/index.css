@@ -1,0 +1,185 @@
+@import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --background: 240 6% 6%;
+    --foreground: 0 0% 93%;
+
+    --card: 240 5% 10%;
+    --card-foreground: 0 0% 93%;
+
+    --popover: 240 5% 10%;
+    --popover-foreground: 0 0% 93%;
+
+    --primary: 270 80% 60%;
+    --primary-foreground: 0 0% 100%;
+
+    --secondary: 240 5% 15%;
+    --secondary-foreground: 0 0% 85%;
+
+    --muted: 240 4% 16%;
+    --muted-foreground: 240 5% 55%;
+
+    --accent: 300 85% 65%;
+    --accent-foreground: 0 0% 100%;
+
+    --destructive: 0 72% 51%;
+    --destructive-foreground: 0 0% 100%;
+
+    --border: 240 5% 18%;
+    --input: 240 5% 18%;
+    --ring: 270 80% 60%;
+
+    --radius: 0.75rem;
+
+    --neon-glow: 270 80% 60%;
+    --neon-pink: 330 85% 60%;
+    --surface: 240 5% 12%;
+
+    --sidebar-background: 240 6% 8%;
+    --sidebar-foreground: 0 0% 93%;
+    --sidebar-primary: 270 80% 60%;
+    --sidebar-primary-foreground: 0 0% 100%;
+    --sidebar-accent: 240 5% 15%;
+    --sidebar-accent-foreground: 0 0% 93%;
+    --sidebar-border: 240 5% 18%;
+    --sidebar-ring: 270 80% 60%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply bg-background text-foreground font-sans antialiased;
+    font-family: 'Inter', sans-serif;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    font-family: 'Space Grotesk', sans-serif;
+  }
+}
+
+@layer components {
+  .neon-glow {
+    box-shadow: 0 0 15px hsl(var(--neon-glow) / 0.3),
+                0 0 45px hsl(var(--neon-glow) / 0.1);
+  }
+
+  .neon-glow-strong {
+    box-shadow: 0 0 20px hsl(var(--neon-glow) / 0.5),
+                0 0 60px hsl(var(--neon-glow) / 0.2);
+  }
+
+  .neon-text {
+    text-shadow: 0 0 10px hsl(var(--neon-glow) / 0.5),
+                 0 0 30px hsl(var(--neon-glow) / 0.2);
+  }
+
+  .neon-border {
+    border-color: hsl(var(--neon-glow) / 0.4);
+  }
+
+  .glass-card {
+    @apply bg-card/80 backdrop-blur-md border border-border/50 rounded-xl;
+  }
+
+  .gradient-primary {
+    background: linear-gradient(135deg, hsl(var(--primary)), hsl(var(--accent)));
+  }
+
+  .gradient-text {
+    background: linear-gradient(135deg, hsl(var(--primary)), hsl(var(--accent)));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  .animate-float {
+    animation: float 3s ease-in-out infinite;
+  }
+}
+
+@keyframes float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-10px); }
+}
+
+@keyframes shimmer {
+  0% { background-position: -200% 0; }
+  100% { background-position: 200% 0; }
+}
+
+@keyframes glow-pulse {
+  0%, 100% { box-shadow: 0 0 15px hsl(270 80% 60% / 0.3); }
+  50% { box-shadow: 0 0 30px hsl(270 80% 60% / 0.6); }
+}
+
+/* ===== Splash Screen Animations ===== */
+@keyframes splash-logo-in {
+  0% { opacity: 0; transform: scale(0.5) rotate(-10deg); }
+  60% { opacity: 1; transform: scale(1.05) rotate(2deg); }
+  100% { opacity: 1; transform: scale(1) rotate(0deg); }
+}
+
+@keyframes splash-orb-float {
+  0%, 100% { transform: translate(0, 0) scale(1); }
+  33% { transform: translate(30px, -50px) scale(1.1); }
+  66% { transform: translate(-20px, 20px) scale(0.9); }
+}
+
+@keyframes splash-loading {
+  0% { width: 0%; }
+  100% { width: 100%; }
+}
+
+@keyframes splash-tagline-in {
+  0% { opacity: 0; letter-spacing: 0.5em; }
+  100% { opacity: 1; letter-spacing: 0.25em; }
+}
+
+.splash-orb {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(80px);
+  opacity: 0.4;
+}
+
+.splash-orb-1 {
+  width: 300px; height: 300px;
+  background: hsl(var(--primary));
+  top: 20%; left: 10%;
+  animation: splash-orb-float 6s ease-in-out infinite;
+}
+
+.splash-orb-2 {
+  width: 200px; height: 200px;
+  background: hsl(var(--accent));
+  bottom: 20%; right: 15%;
+  animation: splash-orb-float 8s ease-in-out infinite 1s;
+}
+
+.splash-orb-3 {
+  width: 150px; height: 150px;
+  background: hsl(var(--neon-pink));
+  top: 50%; left: 60%;
+  animation: splash-orb-float 7s ease-in-out infinite 2s;
+}
+
+.splash-icon-glow {
+  animation: glow-pulse 2s ease-in-out infinite;
+}
+
+.splash-tagline {
+  animation: splash-tagline-in 1s ease-out 1s both;
+}
+
+.splash-loading-bar {
+  animation: splash-loading 2s ease-in-out 0.5s both;
+}
